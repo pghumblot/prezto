@@ -5,9 +5,97 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Source Prezto.
+
+#
+# PATH UPDATE
+#
+# Homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# NodeJS
+export PATH="$HOME/tools/node-v14.15.4-linux-x64/bin:$PATH"
+# Neovim with bob
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+
+export MANPATH=$HOME/tools/ripgrep/doc/man:$MANPATH
+export FPATH=$HOME/tools/ripgrep/complete:$FPATH
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#
+# HISTORY configuration
+#
+export ZDOTDIR="$HOME/.config/zsh"
+export HISTFILE=$ZDOTDIR/.hist_zsh
+export HISTSIZE=5000000
+export SAVEHIST=$HISTSIZE
+
+# HISTORY
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
+setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
+setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+setopt SHARE_HISTORY             # Share history between all sessions.
+# END HISTORY
+
+#
+# LOAD CUSTOM COMPLETIONS
+#
+fpath+=(~/.zsh/completions)
+
+#
+# Source POWERLEVEL10K
+#
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/p10k.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/p10k.zsh"
+fi
+#
+# Source Prezto
+#
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+
+
+# source "$HOMEBREW_PREFIX/opt/kube-ps1/share/kube-ps1.sh"
+#PS1='$(kube_ps1)'$PS1
+
+#source ~/.zprezto/completion/.kubectl_completion
+
+
+#
+## ALIASES
+#
+alias vim='nvim'
+alias rl='source ~/.zshrc'
+alias zalias='nvim ~/.zshrc'
+alias cdis='~/workspace/instant-system'
+alias tmp='~/tmp'
+alias l="ls -lh"
+alias ll="ls -lah"
+alias ssa="ssh-add ~/.ssh/ubuntu_ed25519 "
+alias cpclip='xclip -sel clip'
+alias chx='chmod +x'
+alias gst='git status'
+alias gco='git checkout'
+alias gcm='git commit -m'
+alias gpl='git pull'
+alias gps='git push'
+alias gcl='git clone'
+alias br='brew'
+
+alias k='kubectl'
+alias kns='kubectl-ns'
+alias kx='kubectl-ctx'
+alias xd='kx DEV'
+alias xdl='kx DEV-legacy'
+alias xp='kx PRODUCTION'
+alias xpl='kx PRODUCTION-legacy'
+
+alias ga='git add'
+
